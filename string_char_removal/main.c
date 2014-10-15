@@ -23,7 +23,7 @@ char* removeDuplicate(char str[])//remove duplicate characters from a string,so 
 }
 int main(int argc, char *argv[]) {
 char array[32];
-strcpy(array,"ragssshuuu\n");
+strcpy(array,"rragssshuuu\n");
 printf("%s",array);
 char* result;
 result=removeDuplicate(array);

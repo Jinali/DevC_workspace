@@ -226,7 +226,7 @@ string find_plaintext(string str1)
 
 void read_dictonary2()
 {
-    int first_index=0, last_index=1;
+    int first_index=0, next_index = 1, last_index=1;
     int current_length=0;
     int pwl_index = 0;
     int i=0;
@@ -254,49 +254,63 @@ void read_dictonary2()
     }
     
     //display the file content
+    /*
     for(int p=0; p<i; p++)
     {
             cout << my_dictionary2[p]<<endl;
-    }
+    } */
     
-    system("PAUSE");
+    //system("PAUSE");
     //iterate the for loop
     do_again:
 
-        current_length=my_dictionary2[first_index].length();
         current_string=my_dictionary2[first_index];
+        current_length=my_dictionary2[first_index].length();
 
         while(last_index<no_of_words)
         {
-            int next_length = my_dictionary2[last_index].length();
+            int next_length = my_dictionary2[next_index].length();
+            int last_length = my_dictionary2[last_index].length();
+            
             if(current_length+next_length < myciplen)
             {
-                current_length=current_length + next_length;
-                current_string+=my_dictionary2[last_index];
-                last_index++;
+                current_string+=my_dictionary2[next_index];
+                current_length = current_length + next_length;
+                next_index++;
             }
             else if(current_length+next_length == myciplen)
             {
-                current_string+=my_dictionary2[last_index];
+                current_string+=my_dictionary2[next_index];
                 output = find_plaintext(current_string);
                 if (found == 1)
                 {
                    cout<<"PlainText is: "<<output<<endl;
                    break;
                 }
-                
-                //find_plaintext(current_string);
-                //cout<<"found the  string len=chipher len curr string="<<current_string;
-                //break;///break the current while loop
+                else
+                {
+                    last_index++;
+                    next_index = last_index;
+                    current_string.clear();
+                    current_string = my_dictionary2[first_index];
+                    current_length = my_dictionary2[first_index].length();
+                }
             }
             else
             {
-                
+                last_index++;
+                next_index = last_index;
+                current_string.clear();
+                current_string = my_dictionary2[first_index];
+                current_length = my_dictionary2[first_index].length();
             }
+            
+            
             
             if(last_index==no_of_words-1)
             {
                 first_index++;
+                next_index=first_index+1;
                 last_index=first_index+1;
                 current_length=0;
                 current_string.clear();
